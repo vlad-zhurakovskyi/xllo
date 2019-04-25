@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="wrapper" id="root">
+
+    </div>
+
+    <script>
+
+        function createField(size) {
+            const root = document.getElementById('root');
+            const x = 'x';
+            const o = 'o';
+            const arrTurn = [x, o];
+            const turn = Math.floor(Math.random() * arrTurn.length);
+            let firstPlayer = null;
+            let secondPlayer = null;
+
+            if(arrTurn[turn] === x) {
+                firstPlayer = x;
+                secondPlayer = o
+            } else {
+                firstPlayer = o;
+                secondPlayer = x;
+            }
+
+            console.log(secondPlayer);
+
+            for(let x = 0; size > x; x++) {
+                const row = document.createElement('div');
+                row.className = "row";
+
+                root.appendChild(row);
+
+                for(let y = 0; size > y; y++) {
+                    const flag = false;
+                    const cell = document.createElement('div');
+                    cell.className = "cell";
+                    cell.innerHTML = "_";
+
+                    row.appendChild(cell);
+
+                    cell.onclick = function() {
+                        console.log(!flag)
+                        if (window.localStorage) {
+                            let value = localStorage.getItem('count'),
+                                newvalue = isFinite(value) ? ++value : 0;
+
+                            localStorage.setItem('count', newvalue);
+
+                            if(newvalue % 2 === 0) {
+                                cell.classList.toggle(firstPlayer);
+                                cell.innerHTML = firstPlayer;
+                            } else {
+                                cell.classList.toggle(secondPlayer);
+                                cell.innerHTML = secondPlayer;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        createField(3)
+
+    </script>
+</body>
+</html>
