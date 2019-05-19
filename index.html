@@ -14,6 +14,8 @@
 
         function createField(size) {
             const root = document.getElementById('root');
+            let cellPackage = [];
+
             const x = 'x';
             const o = 'o';
             const arrTurn = [x, o];
@@ -29,8 +31,6 @@
                 secondPlayer = x;
             }
 
-            console.log(secondPlayer);
-
             for(let x = 0; size > x; x++) {
                 const row = document.createElement('div');
                 row.className = "row";
@@ -38,7 +38,6 @@
                 root.appendChild(row);
 
                 for(let y = 0; size > y; y++) {
-                    const flag = false;
                     const cell = document.createElement('div');
                     cell.className = "cell";
                     cell.innerHTML = "_";
@@ -46,7 +45,6 @@
                     row.appendChild(cell);
 
                     cell.onclick = function() {
-                        console.log(!flag)
                         if (window.localStorage) {
                             let value = localStorage.getItem('count'),
                                 newvalue = isFinite(value) ? ++value : 0;
